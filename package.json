@@ -1,0 +1,24 @@
+{
+  "name": "obc-atlas",
+  "version": "1.1.0",
+  "description": "TRSS-Yunzai 原神图鉴：数据取自米游社观测枢，自绘武器图鉴 / 圣遗物海报 / 角色材料卡，2x WebP 实时渲染",
+  "type": "module",
+  "author": "",
+  "license": "MIT",
+  "dependencies": {},
+  "peerDependencies": {
+    "yunzai": "*"
+  },
+  "keywords": [
+    "TRSS-Yunzai",
+    "Yunzai",
+    "genshin",
+    "原神",
+    "图鉴",
+    "观测枢",
+    "米游社",
+    "武器图鉴",
+    "圣遗物",
+    "角色材料"
+  ]
+}

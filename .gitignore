@@ -1,0 +1,14 @@
+# 运行时缓存
+data/
+resources/obc/cache/
+
+# 出图临时文件
+resources/obc/_*.html
+
+# 运行时下载的材料图标
+resources/obc/material-icons/
+
+# 编辑器 / 备份
+*.bak_*
+.DS_Store
+node_modules/

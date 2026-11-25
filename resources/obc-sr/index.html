@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="shortcut icon" href="#" />
+  <link rel="stylesheet" href="{{_res_path}}index.css" />
+</head>
+
+<body {{@sys.scale}}>
+  <div class="container {{rarityClass}}" id="container">
+    <div class="page">
+      <div class="grain"></div>
+      <div class="deco deco1"></div>
+      <div class="deco deco2"></div>
+      <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+
+      <!-- 顶栏 -->
+      <div class="head">
+        <div class="head-mark">铁</div>
+        <div class="brand">
+          <div class="brand-cn">星 铁 图 鉴</div>
+          <div class="brand-en">HONKAI: STAR RAIL · CODEX</div>
+        </div>
+        <div class="head-right">
+          <div class="kind">{{typeCn}}</div>
+          <div class="head-star">{{starText}}</div>
+        </div>
+      </div>
+
+      <!-- 标题 -->
+      <div class="title-row">
+        <div class="td-line"></div>
+        <div class="td-mid">
+          <div class="name">{{name}}</div>
+          <div class="sub-name">
+            {{pathCn}}{{if pathCn && elemCn}} · {{/if}}{{elemCn}}{{if allegiance}} · {{allegiance}}{{/if}}{{if starCn}} · {{starCn}}{{/if}}
+          </div>
+        </div>
+        <div class="td-line"></div>
+      </div>
+
+      {{if type === 'character'}}
+      <div class="main">
+        <div class="art">
+          <div class="art-ring">
+            <div class="art-box">
+              {{if art}}<img src="{{art}}">{{else}}<div class="art-ph">暂无立绘</div>{{/if}}
+            </div>
+          </div>
+          <div class="art-meta">
+            {{if elemCn}}<div class="chip chip-star">{{elemCn}}</div>{{/if}}
+            {{if pathCn}}<div class="chip">{{pathCn}}命途</div>{{/if}}
+            {{if starText}}<div class="chip">{{starText}}</div>{{/if}}
+          </div>
+        </div>
+        <div class="info">
+          <div class="kv">
+            {{if allegiance}}<div class="row"><span>所属</span><b>{{allegiance}}</b></div>{{/if}}
+            {{if cncv}}<div class="row"><span>中文 CV</span><b>{{cncv}}</b></div>{{/if}}
+            {{if jpcv}}<div class="row"><span>日文 CV</span><b>{{jpcv}}</b></div>{{/if}}
+          </div>
+          <div class="stat-row">
+            {{each baseAttr a}}<div class="stat"><b>{{a.v}}</b><span>{{a.k}}</span></div>{{/each}}
+          </div>
+        </div>
+      </div>
+
+      {{if desc}}
+      <div class="section">
+        <div class="section-title"><i class="st-dot"></i><span>角色简介</span><em>PROFILE</em></div>
+        <div class="desc">{{desc}}</div>
+      </div>
+      {{/if}}
+
+      {{if talents && talents.length}}
+      <div class="section">
+        <div class="section-title"><i class="st-dot"></i><span>技能</span><em>ABILITIES</em></div>
+        {{each talents t}}
+        <div class="talent">
+          <div class="tal-head"><span class="tal-type">{{t.type}}</span><b>{{t.name}}</b>{{if t.tag}}<em>{{t.tag}}</em>{{/if}}</div>
+          <div class="tal-desc">{{t.desc}}</div>
+        </div>
+        {{/each}}
+      </div>
+      {{/if}}
+
+      {{if cons && cons.length}}
+      <div class="section">
+        <div class="section-title"><i class="st-dot"></i><span>星魂</span><em>EIDOLON</em></div>
+        <div class="cons">
+          {{each cons c}}
+          <div class="con"><i>{{c.i}}</i><div><b>{{c.name}}</b><span>{{c.desc}}</span></div></div>
+          {{/each}}
+        </div>
+      </div>
+      {{/if}}
+
+      {{if traces && traces.length}}
+      <div class="section">
+        <div class="section-title"><i class="st-dot"></i><span>行迹</span><em>TRACES</em></div>
+        <div class="traces">
+          {{each traces t}}<div class="trace"><b>{{t.name}}</b><span>{{t.desc}}</span></div>{{/each}}
+        </div>
+      </div>
+      {{/if}}
+      {{/if}}
+
+      {{if type === 'weapon'}}
+      <div class="main">
+        <div class="art">
+          <div class="art-ring">
+            <div class="art-box tall">
+              {{if art}}<img src="{{art}}">{{else if icon}}<img src="{{icon}}">{{else}}<div class="art-ph">暂无图片</div>{{/if}}
+            </div>
+          </div>
+          <div class="art-meta">
+            {{if pathCn}}<div class="chip chip-star">{{pathCn}}命途</div>{{/if}}
+          </div>
+        </div>
+        <div class="info">
+          <div class="stat-row wide">
+            {{each baseAttr a}}<div class="stat"><b>{{a.v}}</b><span>{{a.k}}</span></div>{{/each}}
+          </div>
+          {{if desc}}<div class="desc small">{{desc}}</div>{{/if}}
+        </div>
+      </div>
+
+      {{if affixTitle}}
+      <div class="section">
+        <div class="section-title"><i class="st-dot"></i><span>光锥技能</span><em>LIGHT CONE SKILL</em></div>
+        <div class="affix-name">{{affixTitle}}</div>
+        <div class="affix-text">{{affixText}}</div>
+        {{if affixMax}}<div class="affix-note">叠影 5 阶：{{affixMax}}</div>{{/if}}
+      </div>
+      {{/if}}
+      {{/if}}
+
+      {{if type === 'artifact'}}
+      <div class="main single">
+        <div class="art">
+          <div class="art-ring">
+            <div class="art-box">
+              {{if art}}<img src="{{art}}">{{else}}<div class="art-ph">暂无图片</div>{{/if}}
+            </div>
+          </div>
+          <div class="art-meta">
+            <div class="chip chip-star">遗器套装</div>
+            {{if starText}}<div class="chip">{{starText}}</div>{{/if}}
+          </div>
+        </div>
+      </div>
+
+      {{if effects && effects.length}}
+      <div class="section">
+        <div class="section-title"><i class="st-dot"></i><span>套装效果</span><em>SET BONUS</em></div>
+        {{each effects e}}
+        <div class="eff"><div class="eff-tag">{{e.key}}</div><div class="eff-text">{{e.text}}</div></div>
+        {{/each}}
+      </div>
+      {{/if}}
+
+      {{if pieces && pieces.length}}
+      <div class="section">
+        <div class="section-title"><i class="st-dot"></i><span>部件</span><em>PIECES</em></div>
+        <div class="pieces">
+          {{each pieces p}}
+          <div class="piece">
+            {{if p.img}}<img src="{{p.img}}">{{else}}<div class="piece-ph">图</div>{{/if}}
+            <div class="pos">{{p.pos}}</div>
+            <div class="pname">{{p.name}}</div>
+          </div>
+          {{/each}}
+        </div>
+      </div>
+      {{/if}}
+      {{/if}}
+
+      {{if materials && materials.length}}
+      <div class="section">
+        <div class="section-title"><i class="st-dot"></i><span>{{matTitle || '满级总消耗'}}</span><em>{{matNote || 'MATERIALS'}}</em></div>
+        <div class="mat-items">
+          {{each materials m}}
+          <div class="mat">
+            <div class="mat-ico">{{if m.icon}}<img src="{{m.icon}}">{{else}}<i class="mat-ph">材</i>{{/if}}</div>
+            <div class="mat-txt">{{m.name}}</div>
+            <div class="mat-num">×{{m.count}}</div>
+          </div>
+          {{/each}}
+        </div>
+      </div>
+      {{/if}}
+
+      <div class="footer">星铁图鉴<span class="dot">·</span>数据来源：{{dataSource}}<span class="dot">·</span>更新于 {{updatedText}}</div>
+    </div>
+  </div>
+</body>
+
+</html>

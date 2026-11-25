@@ -1,0 +1,21 @@
+# 观测枢图鉴（原神 角色 / 武器 / 圣遗物 + 星铁 角色 / 光锥 / 遗器）配置文件
+
+# 插件优先级：数字越小越先处理。Atlas 是 10、miao 是 50，
+# 这里设 1 保证 #角色/#武器/#圣遗物 先由本插件接管；名字对不上会 return false 交还给后面的插件。
+priority: 1
+
+# 米游社观测枢索引 / 词条页 / 星铁索引 缓存时长（小时），过期后下次查询自动重新拉取
+cacheHours: 12
+# 是否把出图结果缓存到本地（默认 false = 每次实时渲染）
+renderCache: false
+
+# 是否用本地 miao-plugin 元数据补全（武器属性数值/被动、圣遗物套装部件、角色基础属性与天赋材料）
+# 关掉后只显示观测枢能直接提供的字段
+useLocalMeta: true
+
+# ===== 星铁图鉴（*希儿）的数据目录 =====
+# 星铁没有可公开访问的观测枢接口，数据（也含图片）只从本地目录读，本插件**只读不写** miao。
+# 留空 = 自动按顺序找：① 下面这个路径 ② plugins/miao-plugin/resources/meta-sr ③ 本插件 data/meta-sr
+# 想彻底不依赖 miao：把一份 meta-sr 副本（character/weapon/artifact/material 四个目录）放到
+# plugins/obc-atlas/data/meta-sr，或把备份放在任意位置并在这里写绝对路径，然后发一次 #星铁图鉴更新。
+srMetaPath: ''

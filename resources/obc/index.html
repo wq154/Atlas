@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="shortcut icon" href="#" />
+  <link rel="stylesheet" href="{{_res_path}}index.css" />
+</head>
+
+<body {{@sys.scale}}>
+  <div class="container" id="container">
+    <div class="page {{rarityClass}} type-{{type}}">
+      <div class="grain"></div>
+      <div class="deco deco1"></div>
+      <div class="deco deco2"></div>
+      <div class="corner tl"></div>
+      <div class="corner tr"></div>
+      <div class="corner bl"></div>
+      <div class="corner br"></div>
+
+      <div class="head">
+        <div class="head-mark"><span>图</span></div>
+        <div class="brand">
+          <div class="brand-cn">观测枢图鉴</div>
+          <div class="brand-en">MIYOUSHE · OBSERVATORY</div>
+        </div>
+        <div class="head-right">
+          <span class="kind">{{typeCn}}</span>
+          {{if starText}}<span class="head-star">{{starText}}</span>{{/if}}
+        </div>
+      </div>
+
+      <div class="title-row">
+        <div class="td-line"></div>
+        <div class="td-mid">
+          <div class="name">{{name}}</div>
+          {{if summary && summary !== name}}<div class="sub-name">{{summary}}</div>{{/if}}
+        </div>
+        <div class="td-line"></div>
+      </div>
+
+      <div class="main">
+        <div class="art">
+          <div class="art-ring">
+            <div class="art-box">
+              {{if icon}}<img src="{{icon}}" />{{else}}<div class="art-ph">暂无图</div>{{/if}}
+            </div>
+          </div>
+          <div class="art-meta">
+            {{if starCn}}<span class="chip chip-star">{{starCn}}</span>{{/if}}
+            {{if type === 'character' && elemCn}}<span class="chip">{{elemCn}}元素</span>{{/if}}
+            {{if type === 'character' && weaponCn}}<span class="chip">{{weaponCn}}</span>{{/if}}
+            {{if type === 'weapon' && weaponType}}<span class="chip">{{weaponType}}</span>{{/if}}
+            {{if type === 'artifact' && effectTags && effectTags.length}}<span class="chip">{{effectTags[0]}}系</span>{{/if}}
+          </div>
+        </div>
+
+        <div class="info">
+          {{if type === 'character'}}
+          <div class="kv">
+            {{if elemCn}}<div class="row"><span>神之眼</span><b>{{elemCn}}</b></div>{{/if}}
+            {{if weaponCn}}<div class="row"><span>武器类型</span><b>{{weaponCn}}</b></div>{{/if}}
+            {{if regionCn}}<div class="row"><span>所属</span><b>{{regionCn}}</b></div>{{/if}}
+            {{if astro}}<div class="row"><span>命之座</span><b>{{astro}}</b></div>{{/if}}
+            {{if birth}}<div class="row"><span>生日</span><b>{{birth}}</b></div>{{/if}}
+            {{if tags && tags.length}}<div class="row"><span>特殊机制</span><b>{{tags.join(' / ')}}</b></div>{{/if}}
+            {{if cncv}}<div class="row"><span>CV</span><b>{{cncv}}{{if jpcv}} / {{jpcv}}{{/if}}</b></div>{{/if}}
+          </div>
+          {{if baseAttr && baseAttr.length}}
+          <div class="stat-row">
+            {{each baseAttr item}}
+            <div class="stat"><b>{{item.v}}</b><span>{{item.k}}</span></div>
+            {{/each}}
+            {{if growAttr}}<div class="stat"><b>{{growAttr.v}}</b><span>突破 {{growAttr.k}}</span></div>{{/if}}
+          </div>
+          {{/if}}
+          {{/if}}
+
+          {{if type === 'weapon'}}
+          <div class="kv">
+            {{if weaponType}}<div class="row"><span>武器类型</span><b>{{weaponType}}</b></div>{{/if}}
+            {{if baseAtk}}<div class="row"><span>基础攻击力</span><b>{{baseAtk}}</b></div>{{/if}}
+            {{if subAttr}}<div class="row"><span>副属性</span><b>{{subAttr}}</b></div>{{/if}}
+            {{if subAttrs && subAttrs.length}}<div class="row"><span>属性加成</span><b>{{subAttrs.join(' / ')}}</b></div>{{/if}}
+            {{if starCn}}<div class="row"><span>稀有度</span><b>{{starCn}}</b></div>{{/if}}
+          </div>
+          {{/if}}
+
+          {{if type === 'artifact'}}
+          <div class="kv">
+            {{if starCn}}<div class="row"><span>稀有度</span><b>{{starCn}}</b></div>{{/if}}
+            {{if sources && sources.length}}<div class="row"><span>获取方式</span><b>{{sources.join(' / ')}}</b></div>{{/if}}
+            {{if effectTags && effectTags.length}}<div class="row"><span>套装效果</span><b>{{effectTags.join(' / ')}}</b></div>{{/if}}
+          </div>
+          {{/if}}
+        </div>
+      </div>
+
+      {{if type === 'weapon' && affixTitle}}
+      <div class="section">
+        <div class="section-title"><i class="st-dot"></i><span>武器效果</span><em>WEAPON EFFECT</em></div>
+        <div class="affix-name">{{affixTitle}}</div>
+        <div class="affix-text">{{affixTextRich}}</div>
+        <div class="affix-note">括号内数值依次为精炼 1 ~ 5 档</div>
+      </div>
+      {{/if}}
+
+      {{if type === 'artifact' && effects && effects.length}}
+      <div class="section">
+        <div class="section-title"><i class="st-dot"></i><span>套装效果</span><em>SET BONUS</em></div>
+        {{each effects eff}}
+        <div class="eff">
+          <div class="eff-tag">{{eff.key}}</div>
+          <div class="eff-text">{{eff.value}}</div>
+        </div>
+        {{/each}}
+      </div>
+      {{/if}}
+
+      {{if type === 'artifact' && (obcPieces && obcPieces.length)}}
+      <div class="section">
+        <div class="section-title"><i class="st-dot"></i><span>套装部件</span><em>SET PIECES · 观测枢</em></div>
+        <div class="pieces">
+          {{each obcPieces p}}
+          <div class="piece">
+            {{if p.icon}}<img src="{{p.icon}}" />{{/if}}
+            <div class="pos">{{p.pos}}</div>
+            <div class="pname">{{p.name}}</div>
+          </div>
+          {{/each}}
+        </div>
+      </div>
+      {{else if type === 'artifact' && pieces && pieces.length}}
+      <div class="section">
+        <div class="section-title"><i class="st-dot"></i><span>套装部件</span><em>SET PIECES</em></div>
+        <div class="pieces">
+          {{each pieces p}}
+          <div class="piece">
+            {{if p.icon}}<img src="{{p.icon}}" />{{/if}}
+            <div class="pos">{{p.pos}}</div>
+            <div class="pname">{{p.name}}</div>
+          </div>
+          {{/each}}
+        </div>
+      </div>
+      {{/if}}
+
+      {{if (type === 'character' || type === 'weapon') && desc}}
+      <div class="section">
+        <div class="section-title"><i class="st-dot"></i><span>{{if type === 'character'}}角色介绍{{else}}武器介绍{{/if}}</span><em>PROFILE</em></div>
+        <div class="desc">{{desc}}</div>
+      </div>
+      {{/if}}
+
+      {{if materialsObc && materialsObc.length}}
+      <div class="section">
+        <div class="section-title"><i class="st-dot"></i><span>突破材料</span><em>Lv.1 → Lv.90 · 观测枢</em></div>
+        <div class="mat-items">
+          {{each materialsObc m}}
+          <div class="mat">
+            <div class="mat-ico">{{if m.icon}}<img src="{{m.icon}}" />{{else}}<span class="mat-ph">◆</span>{{/if}}</div>
+            <div class="mat-txt"><span>{{m.name}}</span></div>
+            <div class="mat-num">{{m.amount}}</div>
+          </div>
+          {{/each}}
+        </div>
+      </div>
+      {{/if}}
+
+      {{if (!materialsObc || !materialsObc.length) && type === 'character' && matAsc && matAsc.length}}
+      <div class="section">
+        <div class="section-title"><i class="st-dot"></i><span>突破材料</span><em>Lv.1 → Lv.90</em></div>
+        {{each matAsc g}}
+        <div class="mat-group">
+          <div class="mg-head"><span class="mg-name">{{g.kindCn}}</span>{{if g.day}}<span class="mg-day">{{g.day}}</span>{{/if}}</div>
+          <div class="mat-items">
+            {{each g.items it}}
+            <div class="mat">
+              <div class="mat-ico">{{if it.icon}}<img src="{{it.icon}}" />{{else}}<span class="mat-ph">◆</span>{{/if}}</div>
+              <div class="mat-txt"><span>{{it.name}}</span></div>
+              <div class="mat-num">{{it.count}}</div>
+            </div>
+            {{/each}}
+          </div>
+        </div>
+        {{/each}}
+      </div>
+      {{/if}}
+
+      {{if type === 'character' && matTalent && matTalent.length}}
+      <div class="section">
+        <div class="section-title"><i class="st-dot"></i><span>天赋材料</span><em>天赋 10 / 10 / 10</em></div>
+        {{each matTalent g}}
+        <div class="mat-group">
+          <div class="mg-head"><span class="mg-name">{{g.kindCn}}</span>{{if g.day}}<span class="mg-day">{{g.day}}</span>{{/if}}</div>
+          <div class="mat-items">
+            {{each g.items it}}
+            <div class="mat">
+              <div class="mat-ico">{{if it.icon}}<img src="{{it.icon}}" />{{else}}<span class="mat-ph">◆</span>{{/if}}</div>
+              <div class="mat-txt"><span>{{it.name}}</span></div>
+              <div class="mat-num">{{it.count}}</div>
+            </div>
+            {{/each}}
+          </div>
+        </div>
+        {{/each}}
+      </div>
+      {{/if}}
+
+      {{if type === 'weapon' && matWeapon && matWeapon.length}}
+      <div class="section">
+        <div class="section-title"><i class="st-dot"></i><span>突破素材</span><em>Lv.1 → Lv.90</em></div>
+        {{each matWeapon g}}
+        <div class="mat-group">
+          <div class="mg-head"><span class="mg-name">{{g.kindCn}}</span>{{if g.day}}<span class="mg-day">{{g.day}}</span>{{/if}}</div>
+          <div class="mat-items">
+            {{each g.items it}}
+            <div class="mat">
+              <div class="mat-ico">{{if it.icon}}<img src="{{it.icon}}" />{{else}}<span class="mat-ph">◆</span>{{/if}}</div>
+              <div class="mat-txt"><span>{{it.name}}</span></div>
+              <div class="mat-num">{{it.count}}</div>
+            </div>
+            {{/each}}
+          </div>
+        </div>
+        {{/each}}
+      </div>
+      {{/if}}
+
+      {{if recommend && recommend.length}}
+      {{each recommend t}}
+      <div class="section">
+        <div class="section-title"><i class="st-dot"></i><span>{{t.tabName}}</span><em>观测枢推荐{{if t.total > t.items.length}} · 共 {{t.total}}{{/if}}</em></div>
+        <div class="rec-list">
+          {{each t.items it}}
+          <div class="rec">
+            <div class="rec-ico">{{if it.icon}}<img src="{{it.icon}}" />{{else}}<span class="mat-ph">◆</span>{{/if}}</div>
+            <div class="rec-txt">
+              <b>{{it.name}}</b>
+              {{if it.reason}}<span>{{it.reason}}</span>{{/if}}
+            </div>
+          </div>
+          {{/each}}
+        </div>
+      </div>
+      {{/each}}
+      {{/if}}
+
+      {{if (!recommend || !recommend.length) && type === 'character' && weapons && weapons.length}}
+      <div class="section">
+        <div class="section-title"><i class="st-dot"></i><span>适用武器</span><em>{{weaponCn}} · 五星优先</em></div>
+        <div class="mini-grid wide">
+          {{each weapons w}}
+          <div class="mini">
+            {{if w.icon}}<img src="{{w.icon}}" />{{/if}}
+            <span>{{w.name}}</span>
+            {{if w.starText}}<i class="mini-star">{{w.starText}}</i>{{/if}}
+          </div>
+          {{/each}}
+        </div>
+      </div>
+      {{/if}}
+
+      {{if (!recommend || !recommend.length) && type === 'weapon' && characters && characters.length}}
+      <div class="section">
+        <div class="section-title"><i class="st-dot"></i><span>适用角色</span><em>同武器类型 · 观测枢收录</em></div>
+        <div class="mini-grid">
+          {{each characters c}}
+          <div class="mini">
+            {{if c.icon}}<img src="{{c.icon}}" />{{/if}}
+            <span>{{c.name}}</span>
+          </div>
+          {{/each}}
+        </div>
+      </div>
+      {{/if}}
+
+      {{if type !== 'artifact' && sources && sources.length}}
+      <div class="section">
+        <div class="section-title"><i class="st-dot"></i><span>获取途径</span><em>SOURCE</em></div>
+        <div class="tags">
+          {{each sources s}}
+          <span class="chip">{{s}}</span>
+          {{/each}}
+        </div>
+      </div>
+      {{/if}}
+
+      <div class="footer">
+        <span>数据来源 {{dataSource}}</span>
+        <span class="dot">·</span>
+        <span>推荐/材料取自观测枢词条页，其余由本地 miao 元数据补全</span>
+        <span class="dot">·</span>
+        <span>生成于 {{updatedText}}</span>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
