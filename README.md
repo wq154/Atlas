@@ -55,7 +55,7 @@ TRSS-Yunzai 用的《原神》图鉴渲染插件：**数据实时取自米游社
 ```bash
 cd plugins
 # 目录名必须是 obc-atlas
-git clone https://github.com/MYSPLUGIN/Atlas.git obc-atlas
+git clone https://github.com/wq154/Atlas.git obc-atlas
 # 重启 Yunzai
 ```
 
@@ -123,4 +123,5 @@ obc-atlas/
 
 - `1.1.0` 武器图鉴 / 圣遗物海报 / 角色材料卡全部换成新模板；2× WebP 输出；默认实时渲染
 - `1.0.0` 初版：观测枢索引 + 词条页 + 别名 + 星铁本地图鉴
+
 
